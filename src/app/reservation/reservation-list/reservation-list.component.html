@@ -1,3 +1,19 @@
 <div class="content-box-wrapper default-content-box-color">
-  <p>reservation-list</p>
+  <div class="reservations-list-row">
+    <div class="reservations-list-item" *ngFor="let header of headers">
+      <p><b>{{header}}</b></p>
+    </div>
+  </div>
+  <div 
+    class="reservations-list-row" 
+    *ngFor="let reservation of reservations; let i = index" [ngStyle]="{'background': getRowBackgroundColor(i) }">
+      <div class="reservations-list-item" *ngFor="let key of reservationObjectKeys" [ngStyle]="{'background': getRowBackgroundColor(i) }">
+        <p>{{reservation[key]}}</p>
+      </div>
+      <div class="reservations-list-item" [ngStyle]="{'background': getRowBackgroundColor(i) }">
+        <button>EDIT</button>
+      </div>
+  </div>
+  <br />
+  <pagination [totalItems]="11"></pagination>
 </div>
