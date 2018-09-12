@@ -4,3 +4,15 @@ body {
     padding: 0;
     background: #BCBCBC;
 }
+
+.red-text {
+    color: red;
+}
+
+.default-content-box-color {
+    background: #EEEEEE;
+}
+
+.content-box-wrapper {
+    padding: 20px;
+}
