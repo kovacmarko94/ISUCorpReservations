@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     background: #BCBCBC;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .reservations-list-item {
@@ -10,4 +12,11 @@
     flex-grow: 1;
     text-align: center;
     background: #BCBCBC;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.reservations-list-item p {
+    margin-block-start: 0;
+    margin-block-end: 0;
 }

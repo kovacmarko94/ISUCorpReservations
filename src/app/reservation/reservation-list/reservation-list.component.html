@@ -6,12 +6,14 @@
   </div>
   <div 
     class="reservations-list-row" 
-    *ngFor="let reservation of reservations; let i = index" [ngStyle]="{'background': getRowBackgroundColor(i) }">
-      <div class="reservations-list-item" *ngFor="let key of reservationObjectKeys" [ngStyle]="{'background': getRowBackgroundColor(i) }">
+    *ngFor="let reservation of reservations; let i = index">
+      <div class="reservations-list-item" *ngFor="let key of reservationObjectKeys">
         <p>{{reservation[key]}}</p>
       </div>
-      <div class="reservations-list-item" [ngStyle]="{'background': getRowBackgroundColor(i) }">
-        <button>EDIT</button>
+      <div class="reservations-list-item">
+        <button type="button" class="btn btn-gray">
+          EDIT
+        </button>
       </div>
   </div>
   <br />

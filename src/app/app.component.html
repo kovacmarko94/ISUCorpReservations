@@ -22,7 +22,16 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
         </div>
         <div class="nav-content-item">
-            <button>CREATE RESERVATION</button>
+            <button 
+                *ngIf="createReservationButtonActive" 
+                (click)="goToAddEditReservationForm()">
+                CREATE RESERVATION
+            </button>
+            <button 
+                *ngIf="!createReservationButtonActive"
+                (click)="goToListAllReservations()">
+                LIST ALL RESERVATIONS
+            </button>
         </div>
     </div>
     <div class="flex-no-item"></div>

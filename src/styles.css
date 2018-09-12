@@ -20,3 +20,14 @@ body {
 .flex-no-item {
     width: 10%;
 }
+
+.btn-gray {
+    border-radius: 0;
+    background: gray;
+    color: white;
+    padding: 9px 33px;
+}
+
+.btn-gray:focus {
+    box-shadow: 0 0 0 0.2rem #939292;
+}

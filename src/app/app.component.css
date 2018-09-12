@@ -8,6 +8,13 @@
     color: white;
 }
 
+.banner-title p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 .banner-text p {
     margin-block-start: 0;
     margin-block-end: 0;
@@ -57,5 +64,5 @@
 
 .main-content {
     display: flex;
-    padding-top: 20px;
+    padding-top: 10px;
 }

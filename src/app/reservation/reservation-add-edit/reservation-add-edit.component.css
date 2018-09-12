@@ -1,0 +1,13 @@
+.reservation-add-edit-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reservation-add-edit-input {
+    width: 20%;
+    flex-grow: 1;
+}
+
+.content-box-wrapper {
+    padding: 5px;
+}
