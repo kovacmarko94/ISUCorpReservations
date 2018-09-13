@@ -7,75 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationListComponent implements OnInit {
 
-  headers = [
-    'Contact name',
-    'Phone number',
-    'Birth date',
-    'Contact type',
-    ''
-  ];
-
   reservations = [
     {
       contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
+      reservationDate: 'test',
+      rank: 'test',
+      favorite: 'test'
     },
     {
       contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
+      reservationDate: 'test',
+      rank: 'test',
+      favorite: 'test'
     },
     {
       contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
+      reservationDate: 'test',
+      rank: 'test',
+      favorite: 'test'
     },
     {
       contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
+      reservationDate: 'test',
+      rank: 'test',
+      favorite: 'test'
     },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    },
-    {
-      contactName: 'test',
-      phoneNumber: 'test',
-      birthDate: 'test',
-      contactType: 'test'
-    }
   ];
 
   getRowBackgroundColor = (id) => {

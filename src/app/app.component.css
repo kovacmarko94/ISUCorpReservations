@@ -65,4 +65,5 @@
 .main-content {
     display: flex;
     padding-top: 10px;
+    margin: 20px;
 }

@@ -1,16 +1,23 @@
 <div class="content-box-wrapper default-content-box-color">
-  <div class="reservations-list-row">
-    <div class="reservations-list-item" *ngFor="let header of headers">
-      <p><b>{{header}}</b></p>
-    </div>
-  </div>
   <div 
     class="reservations-list-row" 
-    *ngFor="let reservation of reservations; let i = index">
-      <div class="reservations-list-item" *ngFor="let key of reservationObjectKeys">
-        <p>{{reservation[key]}}</p>
+    *ngFor="let reservation of reservations">
+      <div class="flex-item-5 reservations-list-item">
+        <img width="50px" height="50px" src="https://image.freepik.com/free-icon/linux-penguin_318-53972.jpg" />
       </div>
-      <div class="reservations-list-item">
+      <div class="flex-item-23 reservations-list-item align-left">
+        <p style="font-size: 25px">{{reservation.contactName}}</p>
+        <p>{{reservation.reservationDate}}</p>
+      </div>
+      <div class="flex-item-23 reservations-list-item align-left">
+        <p style="font-size: 20px">Rankig</p>
+        <rating class="align-left" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
+        (keyup)="confirmSelection($event)"></rating>
+      </div>
+      <div class="flex-item-23 reservations-list-item">
+        <p style="font-size: 20px">Add Favorite</p>
+      </div>
+      <div class="flex-item-23 reservations-list-item align-right">
         <button type="button" class="btn btn-gray">
           EDIT
         </button>

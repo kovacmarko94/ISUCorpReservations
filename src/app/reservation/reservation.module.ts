@@ -8,7 +8,8 @@ import { ReservationRoutingModule } from './reservation.routing';
 import { NgxEditorModule } from 'ngx-editor';
 import { 
   PaginationModule,
-  ButtonsModule
+  ButtonsModule,
+  RatingModule
 } from 'ngx-bootstrap';
 
 @NgModule({
@@ -18,6 +19,7 @@ import {
     ReservationRoutingModule,
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
+    RatingModule.forRoot(),
     NgxEditorModule,
     HttpClientModule
   ],
