@@ -1,16 +1,35 @@
+.content-box-wrapper {
+    padding: 5px;
+}
+
 .reservation-add-edit-wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
-.reservation-add-edit-input {
+.reservation-add-edit-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.reservation-add-edit-content-item {
+    padding: 1px;
     width: 20%;
     flex-grow: 1;
 }
 
-.content-box-wrapper {
-    padding: 5px;
+@media only screen and (max-width: 930px) {
+    .reservation-add-edit-content {
+        display: flex;
+        flex-direction: column;
+    }
+    .reservation-add-edit-content-item {
+        padding: 1px;
+        width: 100%;
+        flex-grow: 1;
+    }
 }
 
 :host app-ngx-editor /deep/ .ngx-editor-textarea {

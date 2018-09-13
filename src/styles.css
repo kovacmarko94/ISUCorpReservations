@@ -21,6 +21,11 @@ body {
     width: 10%;
 }
 
+.flex-item {
+    width: 80%;
+    flex-grow: 1;
+}
+
 .btn-gray {
     border-radius: 0;
     background: gray;

@@ -35,5 +35,13 @@
 
 .align-right {
     text-align: right;
-    padding-right: 10px;
+    padding-right: 16px;
+}
+
+pagination-controls /deep/ .ng2-pagination li {
+    background: gray;
+}
+
+pagination /deep/ .page-item.active .page-link {
+    background: gray !important;
 }
