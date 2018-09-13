@@ -1,5 +1,6 @@
 .reservation-add-edit-wrapper {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -10,4 +11,9 @@
 
 .content-box-wrapper {
     padding: 5px;
+}
+
+:host app-ngx-editor /deep/ .ngx-editor-textarea {
+    height:300px !important;
+    background: white !important;
 }
