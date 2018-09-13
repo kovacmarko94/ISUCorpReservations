@@ -9,7 +9,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { 
   PaginationModule,
   ButtonsModule,
-  RatingModule
+  RatingModule,
+  BsDatepickerModule,
 } from 'ngx-bootstrap';
 
 @NgModule({
@@ -20,6 +21,7 @@ import {
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     RatingModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NgxEditorModule,
     HttpClientModule
   ],

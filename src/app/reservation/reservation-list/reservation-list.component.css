@@ -44,4 +44,13 @@ pagination-controls /deep/ .ng2-pagination li {
 
 pagination /deep/ .page-item.active .page-link {
     background: gray !important;
+    border-color: gray !important;
+}
+
+pagination /deep/ .page-item.active .page-link {
+    background: rgb(168, 167, 167) !important;
+}
+
+pagination /deep/ .page-link {
+    color: rgb(36, 36, 36) !important;
 }

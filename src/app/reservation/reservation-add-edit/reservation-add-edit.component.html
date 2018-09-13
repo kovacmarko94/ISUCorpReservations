@@ -13,10 +13,24 @@
                 <input type="text" class="form-control" placeholder="Phone" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="reservation-add-edit-content-item">
-                <input type="text" class="form-control" placeholder="Birth Date" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
             </div>
           </div>  
       </div>
   </div>
   <div class="flex-no-item"></div>
+</div>
+
+<br />
+
+<div style="display: flex">
+    <div class="flex-no-item"></div>
+    <div class="flex-item">
+        <app-ngx-editor 
+            [placeholder]="'Enter text here...'" 
+            [spellcheck]="true" 
+            [(ngModel)]="htmlContent">
+        </app-ngx-editor>
+    </div>
+    <div class="flex-no-item"></div>
 </div>
