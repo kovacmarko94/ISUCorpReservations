@@ -56,3 +56,13 @@
     margin-block-start: 0;
     margin-block-end: 0;
 }
+
+@media only screen and (max-width: 930px) {
+    .banner-text {
+        display: none;
+    }
+    .nav-content-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

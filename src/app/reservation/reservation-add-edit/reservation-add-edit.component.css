@@ -18,10 +18,25 @@
     padding: 1px;
     width: 20%;
     flex-grow: 1;
+    position: relative;
 }
 
-.reservation-add-edit-content-item input{
+.reservation-add-edit-content-item input {
     height: 62px;
+    padding-left: 58px;
+}
+
+.fa {
+    font-size: 40px;
+    color: #00000029;
+    position: absolute;
+    top: 11px;
+    left: 12px;
+}
+
+:host app-ngx-editor /deep/ .ngx-editor-textarea {
+    height:300px !important;
+    background: white !important;
 }
 
 @media only screen and (max-width: 930px) {
@@ -36,7 +51,3 @@
     }
 }
 
-:host app-ngx-editor /deep/ .ngx-editor-textarea {
-    height:300px !important;
-    background: white !important;
-}

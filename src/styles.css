@@ -43,3 +43,15 @@ body {
 .btn-gray:focus {
     box-shadow: 0 0 0 0.2rem #939292;
 }
+
+@media only screen and (max-width: 930px) {
+    .banner-text {
+        display: none;
+    }
+    .btn-gray {
+        padding: 9px 30px;
+    }
+    .btn-red {
+        width: 100%;
+    }
+}
