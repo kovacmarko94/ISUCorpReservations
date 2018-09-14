@@ -5,7 +5,7 @@
         <div class="content-box-wrapper default-content-box-color">
             <div class="reservation-add-edit-content">
                 <div class="reservation-add-edit-content-item">
-                    <input formControlName="contactName" [ngClass]="{'is-invalid': error && contactName.invalid}" type="text" class="form-control" placeholder="Contact Name ..." aria-label="Username" aria-describedby="basic-addon1">
+                    <input formControlName="contactName" placeholder="Contact Name ..." [ngClass]="{'is-invalid': error && contactName.invalid}" [typeahead]="contacts" class="form-control">
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">

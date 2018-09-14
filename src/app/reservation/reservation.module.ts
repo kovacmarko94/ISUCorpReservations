@@ -7,6 +7,7 @@ import { ReservationAddEditComponent } from './reservation-add-edit/reservation-
 import { ReservationRoutingModule } from './reservation.routing';
 import { NgxEditorModule } from 'ngx-editor';
 import { CustomFormsModule } from 'ngx-custom-validators';
+import { TypeaheadModule } from 'ngx-bootstrap';
 import { 
   PaginationModule,
   ButtonsModule,
@@ -24,6 +25,7 @@ import {
     ButtonsModule.forRoot(),
     RatingModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot(),
     NgxEditorModule,
     CustomFormsModule,
     HttpClientModule
