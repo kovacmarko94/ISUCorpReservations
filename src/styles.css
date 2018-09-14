@@ -33,6 +33,13 @@ body {
     padding: 9px 33px;
 }
 
+.btn-red {
+    border-radius: 0;
+    background: rgb(179, 48, 48);
+    color: white;
+    padding: 9px 33px;
+}
+
 .btn-gray:focus {
     box-shadow: 0 0 0 0.2rem #939292;
 }

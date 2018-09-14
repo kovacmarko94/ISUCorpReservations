@@ -22,12 +22,14 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
         </div>
         <div class="nav-content-item">
-            <button 
+            <button
+                class="btn btn-gray"
                 *ngIf="createReservationButtonActive" 
                 (click)="goToAddEditReservationForm()">
                 CREATE RESERVATION
             </button>
-            <button 
+            <button
+                class="btn btn-gray"
                 *ngIf="!createReservationButtonActive"
                 (click)="goToListAllReservations()">
                 LIST ALL RESERVATIONS

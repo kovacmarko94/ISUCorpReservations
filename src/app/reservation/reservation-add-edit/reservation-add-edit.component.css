@@ -20,6 +20,10 @@
     flex-grow: 1;
 }
 
+.reservation-add-edit-content-item input{
+    height: 62px;
+}
+
 @media only screen and (max-width: 930px) {
     .reservation-add-edit-content {
         display: flex;
