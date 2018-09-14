@@ -6,6 +6,7 @@ import { ReservationListComponent } from './reservation-list/reservation-list.co
 import { ReservationAddEditComponent } from './reservation-add-edit/reservation-add-edit.component';
 import { ReservationRoutingModule } from './reservation.routing';
 import { NgxEditorModule } from 'ngx-editor';
+import { CustomFormsModule } from 'ngx-custom-validators';
 import { 
   PaginationModule,
   ButtonsModule,
@@ -24,6 +25,7 @@ import {
     RatingModule.forRoot(),
     BsDatepickerModule.forRoot(),
     NgxEditorModule,
+    CustomFormsModule,
     HttpClientModule
   ],
   declarations: [

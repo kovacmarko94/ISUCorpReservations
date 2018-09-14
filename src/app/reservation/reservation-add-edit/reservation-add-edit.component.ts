@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from 'ngx-custom-validators';
 
 @Component({
   selector: 'app-reservation-add-edit',
@@ -23,7 +24,8 @@ export class ReservationAddEditComponent implements OnInit {
       ]],
       phoneNumber: '',
       dateOfBirth: ['', [
-        Validators.required
+        Validators.required,
+        CustomValidators.date
       ]],
       htmlContent: ''
     });

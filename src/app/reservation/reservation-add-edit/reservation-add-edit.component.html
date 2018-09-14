@@ -5,11 +5,11 @@
         <div class="content-box-wrapper default-content-box-color">
             <div class="reservation-add-edit-content">
                 <div class="reservation-add-edit-content-item">
-                    <input formControlName="contactName" type="text" class="form-control" placeholder="Contact Name ..." aria-label="Username" aria-describedby="basic-addon1">
+                    <input formControlName="contactName" [ngClass]="{'is-invalid': error && contactName.invalid}" type="text" class="form-control" placeholder="Contact Name ..." aria-label="Username" aria-describedby="basic-addon1">
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
-                    <input formControlName="contactType" type="text" class="form-control" placeholder="Contact Type" aria-label="Username" aria-describedby="basic-addon1">
+                    <input formControlName="contactType" [ngClass]="{'is-invalid': error && contactType.invalid}" type="text" class="form-control" placeholder="Contact Type" aria-label="Username" aria-describedby="basic-addon1">
                     <i class="fa fa-globe"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
@@ -17,7 +17,7 @@
                     <i class="fa fa-phone"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
-                    <input formControlName="dateOfBirth" type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+                    <input formControlName="dateOfBirth" [ngClass]="{'is-invalid': error && dateOfBirth.invalid}" type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
                     <i class="fa fa-calendar"></i>
                 </div>
             </div>  
