@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservationService } from '../share/service/reservation.service';
+import { Reservation } from '../share/model/reservation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-list',
@@ -6,9 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservation-list.component.css']
 })
 export class ReservationListComponent implements OnInit {
-
-  sortBy = 'Sort by';
-
+  
   sortTypes = [
     'By Date Ascending',
     'By Date Descending',
@@ -17,14 +18,67 @@ export class ReservationListComponent implements OnInit {
     'By Ranking'
   ];
 
+  reservations: Reservation[] = [];
+  selectedSortType = '';
+
+  constructor(
+    private reservationService: ReservationService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    this.getAllReservations();
+  }
+
+  formatTimestamp(timestamp) {
+    const now = new Date(+timestamp);
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const day = days[now.getDay()];
+    const month = months[now.getMonth()];
+    const date = now.getDate();
+    const hours = now.getHours();
+    let minutes = '';
+    if (now.getMinutes() < 10) {
+      minutes = '0' + now.getMinutes();
+    } else {
+      minutes = now.getMinutes().toString();
+    }
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    return day + ' ' + month + ' ' + date + ' at ' + hours + ':' + minutes + ' ' + ampm;
+  }
+
+  getAllReservations() {
+    this.reservationService.getAll().subscribe(response => {
+      this.reservations = response;
+    });
+  }
+
   sortByAlphabeticAscending() {
-    this.reservations = this.reservations.sort(
-      (a, b) => a.contactName < b.contactName ? 1 : -1 );
+    this.reservations.sort(
+      (a, b) => a.contact.name < b.contact.name ? 1 : -1 );
   }
 
   sortByAlphabeticDescending() {
-    this.reservations = this.reservations.sort(
-      (a, b) => a.contactName > b.contactName ? 1 : -1 );
+    this.reservations.sort(
+      (a, b) => a.contact.name > b.contact.name ? 1 : -1 );
+  }
+
+ // refactor
+  sortByDateAscending() {
+    this.reservations.sort((a,b) => {  
+      var dateA = +a.dateOfCreation;
+      var dateB = +b.dateOfCreation;
+      return dateA > dateB ? 1 : -1;  
+    });
+  }
+
+  sortByDateDescending() {
+    this.reservations.sort((a,b) => {  
+      var dateA = +a.dateOfCreation;
+      var dateB = +b.dateOfCreation;
+      return dateA < dateB ? 1 : -1;  
+    });
   }
 
   sortByRanking() {
@@ -34,53 +88,48 @@ export class ReservationListComponent implements OnInit {
 
   applySort(sortType) {
     switch(sortType) {
-      case 'By Alphabetic Ascending':
+      case 0:
+        this.sortByDateAscending();
+        break;
+      case 1:
+        this.sortByDateDescending();
+        break;
+      case 2:
         this.sortByAlphabeticAscending();
         break;
-      case 'By Alphabetic Descending':
+      case 3:
         this.sortByAlphabeticDescending();
         break;
-      case 'By Ranking':
+      case 4:
         this.sortByRanking();
         break;
     }
   }
 
-  reservations = [
-    {
-      contactName: 'pera',
-      reservationDate: 'test',
-      ranking: 1,
-      favorite: 'test'
-    },
-    {
-      contactName: 'ana',
-      reservationDate: 'test',
-      ranking: 5,
-      favorite: 'test'
-    },
-    {
-      contactName: 'djura',
-      reservationDate: 'test',
-      ranking: 4,
-      favorite: 'test'
-    },
-    {
-      contactName: 'mika',
-      reservationDate: 'test',
-      ranking: 3,
-      favorite: 'test'
-    },
-  ];
-
-  onSortChange(sortType) {
-    this.sortBy = sortType;
-    this.applySort(sortType);
+  onFavoriteChange(reservation) {
+    reservation.favorite = !reservation.favorite;
+    this.reservationService
+      .update(reservation.id, reservation)
+      .subscribe(() => {
+        this.getAllReservations();
+      });
   }
 
-  constructor() { }
 
-  ngOnInit() {
+  onRankChange(reservation) {
+    this.reservationService
+      .update(reservation.id, reservation)
+      .subscribe(() => {
+        this.getAllReservations();
+      });
+  }
+
+  onChange(sortType) {
+    this.applySort(+sortType);
+  }
+
+  edit(reservation: Reservation) {
+    this.router.navigate(['reservation/add-edit/' + reservation.id]);
   }
 
 }

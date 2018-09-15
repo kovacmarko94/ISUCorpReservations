@@ -6,7 +6,8 @@ import { ReservationAddEditComponent } from './reservation-add-edit/reservation-
 
 const routes: Routes = [
     { path: '', component: ReservationListComponent },
-    { path: 'add-edit', component: ReservationAddEditComponent }
+    { path: 'add-edit', component: ReservationAddEditComponent },
+    { path: 'add-edit/:id', component: ReservationAddEditComponent }
 ];
 
 export const ReservationRoutingModule: ModuleWithProviders = RouterModule.forChild(routes);

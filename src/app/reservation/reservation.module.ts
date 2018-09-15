@@ -15,6 +15,7 @@ import {
   RatingModule,
   BsDatepickerModule,
 } from 'ngx-bootstrap';
+import { ReservationService } from './share/service/reservation.service';
 
 @NgModule({
   imports: [
@@ -35,6 +36,9 @@ import {
   declarations: [
     ReservationListComponent,
     ReservationAddEditComponent,
+  ],
+  providers: [
+    ReservationService
   ]
 })
 export class ReservationModule { }

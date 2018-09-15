@@ -38,6 +38,22 @@
     padding-right: 16px;
 }
 
+.favorite {
+    font-size: 40px;
+    padding-left: 10px;
+    color: #dc004e;
+}
+
+.not-favorite {
+    font-size: 40px;
+    padding-left: 10px;
+    color: #828080;
+}
+
+.custom-select {
+    width: 25%;
+}
+
 pagination-controls /deep/ .ng2-pagination li {
     background: gray;
 }

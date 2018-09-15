@@ -10,7 +10,9 @@
                         placeholder="Contact Name ..." 
                         [ngClass]="{'is-invalid': error && contactName.invalid}" 
                         [typeahead]="contacts" 
-                        class="form-control">
+                        class="form-control"
+                        [attr.disabled]="disableContactFields ? '' : null"
+                        [(ngModel)]="reservation.contact.name">
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
@@ -19,16 +21,19 @@
                         [ngClass]="{'is-invalid': error && contactType.invalid}" 
                         type="text" class="form-control" 
                         placeholder="Contact Type" 
-                        aria-label="Username" 
-                        aria-describedby="basic-addon1">
+                        aria-describedby="basic-addon1"
+                        [attr.disabled]="disableContactFields ? '' : null"
+                        [(ngModel)]="reservation.contact.type">
                     <i class="fa fa-globe"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
                     <input 
                         formControlName="phoneNumber" 
                         type="text" class="form-control" 
-                        placeholder="Phone" aria-label="Username" 
-                        aria-describedby="basic-addon1">
+                        placeholder="Phone" 
+                        aria-describedby="basic-addon1"
+                        [attr.disabled]="disableContactFields ? '' : null"
+                        [(ngModel)]="reservation.contact.phoneNumber">
                     <i class="fa fa-phone"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
@@ -37,7 +42,9 @@
                         [ngClass]="{'is-invalid': error && dateOfBirth.invalid}" 
                         type="text" placeholder="Birth Date" 
                         class="form-control" 
-                        bsDatepicker>
+                        bsDatepicker
+                        [attr.disabled]="disableContactFields ? '' : null"
+                        [(ngModel)]="reservation.contact.dateOfBirth">
                     <i class="fa fa-calendar"></i>
                 </div>
             </div>  
@@ -54,7 +61,8 @@
             <app-ngx-editor 
                 [placeholder]="'Enter text here...'" 
                 [spellcheck]="true" 
-                formControlName="htmlContent">
+                formControlName="htmlContent"
+                [(ngModel)]="reservation.htmlContent">
             </app-ngx-editor>
         </div>
         <div class="flex-no-item"></div>

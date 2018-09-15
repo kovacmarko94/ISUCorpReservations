@@ -3,7 +3,7 @@
   <div class="flex-item">
     <div class="content-box-wrapper default-content-box-color">
         <div class="reservations-list-row" style="background:#EEEEEE">
-          <div class="btn-group" dropdown>
+          <!-- <div class="btn-group" dropdown>
             <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle"
                     aria-controls="dropdown-basic">
               {{sortBy}} <span class="caret"></span>
@@ -12,7 +12,11 @@
                 role="menu" aria-labelledby="button-basic">
               <li *ngFor="let sort of sortTypes" (click)="onSortChange(sort)" role="menuitem"><a class="dropdown-item">{{sort}}</a></li>
             </ul>
-          </div>
+          </div> -->
+          <select class="custom-select" (change)="onChange($event.target.value)">
+            <option selected disabled value="Sort by">Sort by</option>
+            <option *ngFor="let sort of sortTypes; let i = index" [value]="i">{{sort}}</option>
+          </select>
       </div>
         <div 
           class="reservations-list-row" 
@@ -21,19 +25,21 @@
               <img width="50px" height="50px" src="https://image.freepik.com/free-icon/linux-penguin_318-53972.jpg" />
             </div>
             <div class="flex-item-23 reservations-list-item align-left">
-              <p style="font-size: 25px">{{reservation.contactName}}</p>
-              <p>{{reservation.reservationDate}}</p>
+              <p style="font-size: 25px">{{reservation.contact.name}}</p>
+              <p>{{formatTimestamp(reservation.dateOfCreation)}}</p>
             </div>
             <div class="flex-item-23 reservations-list-item align-left">
               <p style="font-size: 20px">Rankig</p>
               <rating class="align-left" style="font-size:24px;" [(ngModel)]="reservation.ranking" [max]="5" [readonly]="isReadonly"
-              (keyup)="confirmSelection($event)"></rating>
+               (click)="onRankChange(reservation)"></rating>
             </div>
             <div class="flex-item-23 reservations-list-item">
-              <p style="font-size: 20px">Add Favorite</p>
+              <p style="font-size: 20px">Add Favorite 
+                <i style="cursor: pointer;" class="fa fa-gratipay" (click)="onFavoriteChange(reservation)" [ngClass]="reservation.favorite ? 'favorite': 'not-favorite'"></i>
+              </p>
             </div>
             <div class="flex-item-23 reservations-list-item align-right">
-              <button type="button" class="btn btn-gray">
+              <button (click)="edit(reservation)" type="button" class="btn btn-gray">
                 EDIT
               </button>
             </div>
