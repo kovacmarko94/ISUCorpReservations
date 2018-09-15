@@ -30,11 +30,13 @@ export class ReservationAddEditComponent implements OnInit {
       htmlContent: ''
     });
   }
-  
+
   onSubmit() {
     if (!this.form.valid) {
       this.error = true;
     }
+    const date = new Date(this.form.value.dateOfBirth);
+    console.log(date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear())
   }
 
   get contactName() {

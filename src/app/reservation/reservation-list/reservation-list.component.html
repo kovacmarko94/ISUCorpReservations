@@ -2,6 +2,18 @@
   <div class="flex-no-item"></div>
   <div class="flex-item">
     <div class="content-box-wrapper default-content-box-color">
+        <div class="reservations-list-row" style="background:#EEEEEE">
+          <div class="btn-group" dropdown>
+            <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle"
+                    aria-controls="dropdown-basic">
+              {{sortBy}} <span class="caret"></span>
+            </button>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-basic">
+              <li *ngFor="let sort of sortTypes" (click)="onSortChange(sort)" role="menuitem"><a class="dropdown-item">{{sort}}</a></li>
+            </ul>
+          </div>
+      </div>
         <div 
           class="reservations-list-row" 
           *ngFor="let reservation of reservations">
@@ -14,7 +26,7 @@
             </div>
             <div class="flex-item-23 reservations-list-item align-left">
               <p style="font-size: 20px">Rankig</p>
-              <rating class="align-left" style="font-size:24px;" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly"
+              <rating class="align-left" style="font-size:24px;" [(ngModel)]="reservation.ranking" [max]="5" [readonly]="isReadonly"
               (keyup)="confirmSelection($event)"></rating>
             </div>
             <div class="flex-item-23 reservations-list-item">

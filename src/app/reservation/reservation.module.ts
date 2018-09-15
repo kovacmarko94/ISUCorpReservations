@@ -8,6 +8,7 @@ import { ReservationRoutingModule } from './reservation.routing';
 import { NgxEditorModule } from 'ngx-editor';
 import { CustomFormsModule } from 'ngx-custom-validators';
 import { TypeaheadModule } from 'ngx-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap';
 import { 
   PaginationModule,
   ButtonsModule,
@@ -26,6 +27,7 @@ import {
     RatingModule.forRoot(),
     BsDatepickerModule.forRoot(),
     TypeaheadModule.forRoot(),
+    BsDropdownModule.forRoot(),
     NgxEditorModule,
     CustomFormsModule,
     HttpClientModule
