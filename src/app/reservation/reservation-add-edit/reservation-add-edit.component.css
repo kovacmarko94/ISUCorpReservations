@@ -18,6 +18,7 @@
     padding: 1px;
     width: 20%;
     flex-grow: 1;
+    margin-top: 17px;
     position: relative;
 }
 
@@ -49,5 +50,9 @@
         width: 100%;
         flex-grow: 1;
     }
+}
+
+.disable-reservation-contact-form {
+    pointer-events: none;
 }
 

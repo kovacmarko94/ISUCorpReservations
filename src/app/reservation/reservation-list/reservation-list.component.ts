@@ -18,7 +18,7 @@ export class ReservationListComponent implements OnInit {
     'By Ranking'
   ];
 
-  reservations: Reservation[] = [];
+  reservations: Reservation[];
   selectedSortType = '';
   totalPages = 1;
   currentPage = 0;
@@ -51,7 +51,7 @@ export class ReservationListComponent implements OnInit {
   }
 
   getAllReservations(page) {
-    this.reservationService.getAll(page).subscribe(response => {
+    this.reservationService.getByPage(page).subscribe(response => {
       this.reservations = response.content;
       this.totalPages = response.totalElements;
     });
@@ -67,21 +67,14 @@ export class ReservationListComponent implements OnInit {
       (a, b) => a.contact.name > b.contact.name ? 1 : -1 );
   }
 
- // refactor
   sortByDateAscending() {
-    this.reservations.sort((a,b) => {  
-      var dateA = +a.dateOfCreation;
-      var dateB = +b.dateOfCreation;
-      return dateA > dateB ? 1 : -1;  
-    });
+    this.reservations.sort(
+      (a, b) => +a.dateOfCreation > +b.dateOfCreation ? 1 : -1);
   }
 
   sortByDateDescending() {
-    this.reservations.sort((a,b) => {  
-      var dateA = +a.dateOfCreation;
-      var dateB = +b.dateOfCreation;
-      return dateA < dateB ? 1 : -1;  
-    });
+    this.reservations.sort(
+      (a, b) => +a.dateOfCreation < +b.dateOfCreation ? 1 : -1);
   }
 
   sortByRanking() {

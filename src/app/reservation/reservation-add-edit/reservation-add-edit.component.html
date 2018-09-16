@@ -1,18 +1,20 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div style="display: flex">
     <div class="flex-no-item"></div>
-    <div class="flex-item">
+    <div class="flex-item" [ngClass]="{'disable-reservation-contact-form': disableContactFields}">
         <div class="content-box-wrapper default-content-box-color">
             <div class="reservation-add-edit-content">
                 <div class="reservation-add-edit-content-item">
                     <input 
+                        id="contactName"
                         formControlName="contactName" 
                         placeholder="Contact Name ..." 
                         [ngClass]="{'is-invalid': error && contactName.invalid}" 
-                        [typeahead]="contacts" 
+                        [typeahead]="names"
+                        (typeaheadOnSelect)="onNameSelect($event.value)"
                         class="form-control"
-                        [attr.disabled]="disableContactFields ? '' : null"
-                        [(ngModel)]="reservation.contact.name">
+                        [(ngModel)]="reservation.contact.name"
+                        [disabled]="disableContactFields">
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
@@ -23,8 +25,8 @@
                             formControlName="contactType" 
                             (change)="onContactTypeChange($event.target.value)"
                             [ngClass]="{'is-invalid': error && contactType.invalid}" 
-                            [attr.disabled]="disableContactFields ? '' : null"
-                            style="color: gray">
+                            style="color: gray"
+                            [(ngModel)]="reservation.contact.type">
                             <option [selected]="!reservation.contact.type" disabled value="Contact Type">Contact Type</option>
                             <option 
                                 *ngFor="let contactType of contactTypes; let i = index" 
@@ -43,7 +45,6 @@
                         type="text" class="form-control" 
                         placeholder="Phone" 
                         aria-describedby="basic-addon1"
-                        [attr.disabled]="disableContactFields ? '' : null"
                         [(ngModel)]="reservation.contact.phoneNumber">
                     <i class="fa fa-phone"></i>
                 </div>
@@ -54,7 +55,6 @@
                         type="text" placeholder="Birth Date" 
                         class="form-control" 
                         bsDatepicker
-                        [attr.disabled]="disableContactFields ? '' : null"
                         [(ngModel)]="reservation.contact.dateOfBirth">
                     <i class="fa fa-calendar"></i>
                 </div>
@@ -87,7 +87,7 @@
             <div class="alert alert-danger" style="text-align:center" *ngIf="error">
                 <strong>Error!</strong> Input fields are invalid!
             </div>
-            <button class="btn btn-red" type="submit">SEND</button>
+            <button id="submitButton" class="btn btn-red" type="submit">SEND</button>
         </div>
         <div class="flex-no-item"></div>
     </div>

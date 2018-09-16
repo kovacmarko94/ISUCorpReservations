@@ -12,7 +12,11 @@ export class ReservationService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(page: number) {
+  getAll() {
+    return this.http.get<any>(this.url);
+  }
+
+  getByPage(page: number) {
     page = page ? page : 0;
     return this.http.get<any>(`${this.url}/?page=${page}&size=10`);
   }

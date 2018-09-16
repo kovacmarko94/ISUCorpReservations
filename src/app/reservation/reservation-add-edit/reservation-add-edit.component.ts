@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'ngx-custom-validators';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,8 +13,10 @@ import { Reservation } from '../share/model/reservation';
 export class ReservationAddEditComponent implements OnInit {
 
   form: FormGroup;
+  names = [];
   error = false;
   disableContactFields = false;
+  reservations: any[] = [];
   reservation: Reservation = {
     id: null,
     dateOfCreation: '',
@@ -26,7 +28,7 @@ export class ReservationAddEditComponent implements OnInit {
       type: null
     },
   };
-
+  
   contactTypes = [
     {
       id: 0, 
@@ -46,66 +48,85 @@ export class ReservationAddEditComponent implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private reservationService: ReservationService
+    private reservationService: ReservationService,
+    private renderer: Renderer2,
   ) { }
 
   ngOnInit() {
-    this.applyFormValidation();
-  }
-
-  isEditModeActive() {
-    return this.activeRoute.snapshot.params.id ? true : false;
-  }
-
-  getPathParam() {
-    return this.activeRoute.snapshot.params.id;
-  }
-
-  applyFormValidation() {
-    const editModeActive = this.isEditModeActive();
-    if (editModeActive) {
-      this.disableContactFields = true;
-      this.form = this.fb.group({
-        contactName: '',
-        contactType: '',
-        dateOfBirth: '',
-        phoneNumber: '',
-        htmlContent: ['', [
-          Validators.required
-        ]],
-      });
-      const id = this.getPathParam();
-      this.reservationService.findById(id).subscribe(response => {
-        this.reservation = response;
-        this.form.value['contactName'] = response.contact.name;
-        this.form.value['contactType'] = response.contact.type;
-        this.form.value['dateOfBirth'] = response.contact.dateOfBirth;
-        this.form.value['phoneNumber'] = response.contact.phoneNumber;
-        this.form.value['htmlContent'] = response.htmlContent;
-        this.form.value['dateOfCreation'] = response.dateOfCreation;
-      });
-    } else {
-      this.form = this.fb.group({
-        contactName: ['', [
-          Validators.required
-        ]],
-        contactType: ['', [
-          Validators.required
-        ]],
-        dateOfBirth: ['', [
-          Validators.required,
-          CustomValidators.date
-        ]],
-        htmlContent: ['', [
-          Validators.required
-        ]],
-        phoneNumber: '',
+    this.setupReservationForm();
+    if (!this.disableContactFields) {
+      this.reservationService.getAll().subscribe(reservations => {
+        this.reservations = reservations.content;
+        this.names = this.getNames();
       });
     }
   }
 
-  getDateOfBirth(date) {
-    return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+  focusEditor() {
+    const element = this.renderer.selectRootElement('#contactName');
+    setTimeout(() => element.blur(), 0);
+  }
+
+  onNameSelect(name) {
+    this.focusEditor();
+    for (let i = 0; i < this.reservations.length; i++) {
+      if (this.reservations[i].contact.name === name) {
+        this.reservation = this.reservations[i];
+        this.updateFormValues(); 
+      }
+    }
+    this.disableFormContactFields();
+  }
+
+  disableFormContactFields() {
+    this.disableContactFields = true;
+  }
+
+  getNames() {
+    return this.reservations.map(reservation => reservation.contact.name);
+  }
+
+  applyFormValidations() {
+    this.form = this.fb.group({
+      contactName: ['', [
+        Validators.required
+      ]],
+      contactType: ['', [
+        Validators.required
+      ]],
+      dateOfBirth: ['', [
+        Validators.required,
+        CustomValidators.date
+      ]],
+      htmlContent: ['', [
+        Validators.required
+      ]],
+      phoneNumber: '',
+    });
+  }
+
+  setupReservationForm() {
+    const isIdPresent = this.getReservationIdFromUrl();
+    if (isIdPresent) {
+      this.disableFormContactFields();
+      this.applyFormValidations();
+      const id = this.getReservationIdFromUrl();
+      this.reservationService.findById(id).subscribe(response => {
+        this.reservation = response;
+        this.updateFormValues();
+      });
+    } else {
+      this.applyFormValidations()
+    }
+  }
+
+  updateFormValues() {
+    this.form.value['contactName'] = this.reservation.contact.name;
+    this.form.value['contactType'] = this.reservation.contact.type;
+    this.form.value['dateOfBirth'] = this.reservation.contact.dateOfBirth;
+    this.form.value['phoneNumber'] = this.reservation.contact.phoneNumber;
+    this.form.value['htmlContent'] = this.reservation.htmlContent;
+    this.form.value['dateOfCreation'] = this.reservation.dateOfCreation;
   }
 
   onSubmit() {
@@ -117,12 +138,21 @@ export class ReservationAddEditComponent implements OnInit {
     }
   }
 
+  getReservationIdFromUrl() {
+    const id = this.activeRoute.snapshot.params.id
+    return id ? id : null;
+  }
+
+  getDateOfBirth(date) {
+    return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+  }
+
   firstLetterToUpperCase(name) {
     return name[0].toLocaleUpperCase() + name.slice(1, name.length)
   }
 
   goToReservationListPage() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/reservation']);
   }
 
   getDateOfReservationCreation() {
