@@ -40,7 +40,7 @@
             </div>
         </div>
         <br />
-        <pagination [totalItems]="11"></pagination>
+        <pagination (pageChanged)="pageChanged($event.page)" [totalItems]="totalPages"></pagination>
       </div>
   </div>
   <div class="flex-no-item"></div>

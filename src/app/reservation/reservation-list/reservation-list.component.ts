@@ -20,6 +20,8 @@ export class ReservationListComponent implements OnInit {
 
   reservations: Reservation[] = [];
   selectedSortType = '';
+  totalPages = 1;
+  currentPage = 0;
 
   constructor(
     private reservationService: ReservationService,
@@ -27,7 +29,7 @@ export class ReservationListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getAllReservations();
+    this.getAllReservations(this.currentPage);
   }
 
   formatTimestamp(timestamp) {
@@ -48,9 +50,10 @@ export class ReservationListComponent implements OnInit {
     return day + ' ' + month + ' ' + date + ' at ' + hours + ':' + minutes + ' ' + ampm;
   }
 
-  getAllReservations() {
-    this.reservationService.getAll().subscribe(response => {
-      this.reservations = response;
+  getAllReservations(page) {
+    this.reservationService.getAll(page).subscribe(response => {
+      this.reservations = response.content;
+      this.totalPages = response.totalElements;
     });
   }
 
@@ -86,6 +89,11 @@ export class ReservationListComponent implements OnInit {
       (a, b) => a.ranking < b.ranking ? 1 : -1 );
   }
 
+  pageChanged(page) {
+    this.currentPage = page - 1;
+    this.getAllReservations(this.currentPage);
+  }
+
   applySort(sortType) {
     switch(sortType) {
       case 0:
@@ -111,7 +119,7 @@ export class ReservationListComponent implements OnInit {
     this.reservationService
       .update(reservation.id, reservation)
       .subscribe(() => {
-        this.getAllReservations();
+        this.getAllReservations(this.currentPage);
       });
   }
 
@@ -120,7 +128,7 @@ export class ReservationListComponent implements OnInit {
     this.reservationService
       .update(reservation.id, reservation)
       .subscribe(() => {
-        this.getAllReservations();
+        this.getAllReservations(this.currentPage);
       });
   }
 
