@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div style="display: flex">
+    <div class="flex-no-item"></div>
+    <div class="flex-item">
+      <div class="content-box-wrapper default-content-box-color">
+        <div class="contact-add-edit-content">
+          <div class="contact-add-edit-content-item">
+            <input 
+              id="contactName"
+              formControlName="contactName" 
+              placeholder="Contact Name ..." 
+              [ngClass]="{'is-invalid': error && contactName.invalid}" 
+              class="form-control"
+              [(ngModel)]="contact.name">
+            <i class="fa fa-user-circle"></i>
+          </div>
+          <div class="contact-add-edit-content-item">
+            <div>
+              <div style="position:relative;">
+                  <select 
+                    class="form-control"
+                    formControlName="contactType" 
+                    (change)="onContactTypeChange($event.target.value)"
+                    [ngClass]="{'is-invalid': error && contactType.invalid}" 
+                    style="color: gray"
+                    [(ngModel)]="contact.type">
+                  <option [selected]="!contact.type" disabled value="Contact Type">Contact Type</option>
+                  <option 
+                      *ngFor="let contactType of contactTypes; let i = index" 
+                      [selected]="contactType.id === contact.type" 
+                      [value]=i >
+                      {{contactType.name}}
+                  </option>
+                </select>
+                <i class="fa fa-globe"></i>
+              </div>
+            </div>
+          </div>
+          <div class="contact-add-edit-content-item">
+            <input formControlName="phoneNumber" 
+              type="text" class="form-control" 
+              placeholder="Phone" 
+              aria-describedby="basic-addon1"
+              [(ngModel)]="contact.phoneNumber">
+            <i class="fa fa-phone"></i>
+          </div>
+          <div class="contact-add-edit-content-item">
+            <input formControlName="dateOfBirth" 
+              [ngClass]="{'is-invalid': error && dateOfBirth.invalid}" 
+              type="text" placeholder="Birth Date" 
+              class="form-control" 
+              bsDatepicker
+              [(ngModel)]="contact.dateOfBirth">
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-no-item"></div>
+  </div>
+
+  <br />
+
+  <div style="display: flex">
+    <div class="flex-no-item"></div>
+    <div class="flex-item" style="text-align:right">
+      <div class="alert alert-danger" style="text-align:center" *ngIf="error">
+        <strong>Error!</strong> {{error}}
+      </div>
+      <button id="submitButton" class="btn btn-red" type="submit">SAVE</button>
+    </div>
+    <div class="flex-no-item"></div>
+  </div>
+
+  <br />
+</form>

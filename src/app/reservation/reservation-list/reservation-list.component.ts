@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../share/service/reservation.service';
 import { Reservation } from '../share/model/reservation';
 import { Router } from '@angular/router';
+import {formatTimestamp} from '../../share/utils';
 
 @Component({
   selector: 'app-reservation-list',
@@ -32,29 +33,15 @@ export class ReservationListComponent implements OnInit {
     this.getAllReservations(this.currentPage);
   }
 
-  formatTimestamp(timestamp) {
-    const now = new Date(+timestamp);
-    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const day = days[now.getDay()];
-    const month = months[now.getMonth()];
-    const date = now.getDate();
-    const hours = now.getHours();
-    let minutes = '';
-    if (now.getMinutes() < 10) {
-      minutes = '0' + now.getMinutes();
-    } else {
-      minutes = now.getMinutes().toString();
-    }
-    const ampm = hours >= 12 ? 'pm' : 'am';
-    return day + ' ' + month + ' ' + date + ' at ' + hours + ':' + minutes + ' ' + ampm;
-  }
-
   getAllReservations(page) {
     this.reservationService.getByPage(page).subscribe(response => {
       this.reservations = response.content;
       this.totalPages = response.totalElements;
     });
+  }
+
+  formatTimestamp(timestamp) {
+    return formatTimestamp(timestamp);
   }
 
   sortByAlphabeticAscending() {

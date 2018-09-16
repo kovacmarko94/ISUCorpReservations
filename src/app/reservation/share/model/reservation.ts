@@ -1,4 +1,4 @@
-import { Contact } from "./contact";
+import { Contact } from "../../../share/model/contact";
 
 export interface Reservation {
     id?: number,

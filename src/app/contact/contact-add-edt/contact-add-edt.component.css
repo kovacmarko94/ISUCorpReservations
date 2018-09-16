@@ -1,0 +1,26 @@
+.contact-add-edit-content {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.contact-add-edit-content-item {
+    padding: 1px;
+    flex-grow: 1;
+    position: relative;
+}
+
+.contact-add-edit-content-item input, select {
+    height: 62px;
+    padding-left: 58px;
+}
+
+.fa {
+    font-size: 40px;
+    color: #00000029;
+    position: absolute;
+    top: 11px;
+    left: 12px;
+}

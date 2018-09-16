@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
 
   createReservationButtonActive: boolean = true;
 
+  url = '';
+
   constructor(
     private router: Router
   ) { }
@@ -18,17 +20,26 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.createReservationButtonActive = event.url === '/reservation' ? true : false;
+        this.url = event.url;
       }
     });
   }
 
-  goToAddEditReservationForm = () => {
+  goToAddEditReservationForm() {
     this.createReservationButtonActive = !this.createReservationButtonActive;
     this.router.navigate(['reservation/add-edit']);
   };
 
-  goToListAllReservations = () => {
+  goToListAllReservations() {
     this.createReservationButtonActive = !this.createReservationButtonActive;
     this.router.navigate(['reservation']);
   };
+
+  goToListAllContacts() {
+    this.router.navigate(['contact']);
+  }
+
+  goToAddEditContacts() {
+    this.router.navigate(['contact/add-edit']);
+  }
 }

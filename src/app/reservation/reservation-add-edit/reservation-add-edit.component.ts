@@ -4,6 +4,7 @@ import { CustomValidators } from 'ngx-custom-validators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReservationService } from '../share/service/reservation.service';
 import { Reservation } from '../share/model/reservation';
+import { getDateOfBirth, firstLetterToUpperCase} from '../../share/utils';
 
 @Component({
   selector: 'app-reservation-add-edit',
@@ -143,14 +144,6 @@ export class ReservationAddEditComponent implements OnInit {
     return id ? id : null;
   }
 
-  getDateOfBirth(date) {
-    return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
-  }
-
-  firstLetterToUpperCase(name) {
-    return name[0].toLocaleUpperCase() + name.slice(1, name.length)
-  }
-
   goToReservationListPage() {
     this.router.navigate(['/reservation']);
   }
@@ -171,8 +164,8 @@ export class ReservationAddEditComponent implements OnInit {
   }
 
   save() {
-    const dateOfBirth = this.getDateOfBirth(this.reservation.contact.dateOfBirth);
-    this.reservation.contact.name = this.firstLetterToUpperCase(this.reservation.contact.name);
+    const dateOfBirth = getDateOfBirth(this.reservation.contact.dateOfBirth);
+    this.reservation.contact.name = firstLetterToUpperCase(this.reservation.contact.name);
     this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservation.contact.dateOfBirth = dateOfBirth;
     this.reservationService.save(this.reservation).subscribe(() => {

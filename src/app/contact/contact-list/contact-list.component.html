@@ -1,0 +1,35 @@
+<div style="display: flex">
+  <div class="flex-no-item"></div>
+  <div class="flex-item">
+      <div class="content-box-wrapper default-content-box-color">
+        <div class="contact-list-row">
+          <div *ngFor="let header of headers" class="contact-list-item">
+            <p><b>{{header}}</b></p>
+          </div>
+          <div class="contact-list-item"></div>
+          <div class="contact-list-item"></div>
+        </div>
+        <div class="contact-list-row" *ngFor="let contact of contacts">
+            <div class="contact-list-item">
+              <p>{{contact.name}}</p>
+            </div>
+            <div class="contact-list-item">
+              <p>{{contactTypes[contact.type]}}</p>
+            </div>
+            <div class="contact-list-item">
+              <p>{{contact.phoneNumber}}</p>
+            </div>
+            <div class="contact-list-item">
+              <p>{{contact.dateOfBirth}}</p>
+            </div>
+            <div class="contact-list-item">
+              <button class="btn btn-gray">EDIT</button>
+            </div>
+            <div class="contact-list-item">
+              <button class="btn btn-red">DELETE</button>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="flex-no-item"></div>
+</div>

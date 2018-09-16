@@ -1,0 +1,20 @@
+.contact-list-row {
+    display: flex;
+    align-items: center;
+    background: #BCBCBC;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.contact-list-item {
+    width: 16.66%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.contact-list-item p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}

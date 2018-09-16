@@ -34,6 +34,18 @@
                 (click)="goToListAllReservations()">
                 LIST ALL RESERVATIONS
             </button>
+            <button
+                class="btn btn-gray"
+                *ngIf="!createReservationButtonActive && url !== '/contact'"
+                (click)="goToListAllContacts()">
+                LIST ALL CONTACTS
+            </button>
+            <button
+                class="btn btn-gray"
+                *ngIf="url === '/contact'"
+                (click)="goToAddEditContacts()">
+                ADD CONTACT
+            </button>
         </div>
     </div>
     <div class="flex-no-item"></div>
