@@ -102,20 +102,33 @@ export class ReservationAddEditComponent implements OnInit {
     }
   }
 
+  firstLetterToUpperCase(name) {
+    return name[0].toLocaleUpperCase() + name.slice(1, name.length)
+  }
+
+  goToReservationListPage() {
+    this.router.navigate(['/']);
+  }
+
+  getDateOfReservationCreation() {
+    return new Date().getTime().toString();
+  }
+
   update(id) {
-    this.reservation.dateOfCreation = new Date().getTime().toString();
+    this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservationService.update(id, this.reservation).subscribe(() => {
-      this.router.navigate(['/']);
+      this.goToReservationListPage()
     });
   }
 
   save() {
     const dateOfBirth = this.getDateOfBirth(this.reservation.contact.dateOfBirth);
-    this.reservation.dateOfCreation = new Date().getTime().toString();
+    this.reservation.contact.name = this.firstLetterToUpperCase(this.reservation.contact.name);
+    this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservation.contact.dateOfBirth = dateOfBirth;
     this.reservation.contact.type = 1; // remove this later
     this.reservationService.save(this.reservation).subscribe(() => {
-      this.router.navigate(['/']);
+      this.goToReservationListPage()
     });
   }
 

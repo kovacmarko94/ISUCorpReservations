@@ -3,21 +3,17 @@
   <div class="flex-item">
     <div class="content-box-wrapper default-content-box-color">
         <div class="reservations-list-row" style="background:#EEEEEE">
-          <!-- <div class="btn-group" dropdown>
-            <button id="button-basic" dropdownToggle type="button" class="btn dropdown-toggle"
-                    aria-controls="dropdown-basic">
-              {{sortBy}} <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
-                role="menu" aria-labelledby="button-basic">
-              <li *ngFor="let sort of sortTypes" (click)="onSortChange(sort)" role="menuitem"><a class="dropdown-item">{{sort}}</a></li>
-            </ul>
-          </div> -->
-          <select class="custom-select" (change)="onChange($event.target.value)">
-            <option selected disabled value="Sort by">Sort by</option>
-            <option *ngFor="let sort of sortTypes; let i = index" [value]="i">{{sort}}</option>
-          </select>
-      </div>
+          <div class="form-group">
+            <div style="position:relative;">
+              <select class="form-control sort-types" (change)="onChange($event.target.value)">
+                <option selected disabled value="Sort by">Sort by</option>
+                <option *ngFor="let sort of sortTypes; let i = index" [value]="i">{{sort}}</option>
+              </select>
+              <i class="fa fa-sort-amount-asc"></i>
+            </div>
+            
+          </div>
+        </div>
         <div 
           class="reservations-list-row" 
           *ngFor="let reservation of reservations">

@@ -50,8 +50,21 @@
     color: #828080;
 }
 
+.sort-types {
+    height: 54px;
+    padding-left: 47px;
+}
+
 .custom-select {
     width: 25%;
+}
+
+.fa-sort-amount-asc {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-size: 24px;
+    color: gray;
 }
 
 pagination-controls /deep/ .ng2-pagination li {
