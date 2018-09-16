@@ -17,15 +17,30 @@ export class ReservationAddEditComponent implements OnInit {
   disableContactFields = false;
   reservation: Reservation = {
     id: null,
+    dateOfCreation: '',
+    htmlContent: '',
     contact: {
       name: '',
       dateOfBirth: '',
       phoneNumber: '',
       type: null
     },
-    dateOfCreation: '',
-    htmlContent: '',
   };
+
+  contactTypes = [
+    {
+      id: 0, 
+      name: 'Contact Type 1'
+    },
+    {
+      id: 1, 
+      name: 'Contact Type 2'
+    },
+    {
+      id: 2, 
+      name: 'Contact Type 3'
+    },
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -114,6 +129,10 @@ export class ReservationAddEditComponent implements OnInit {
     return new Date().getTime().toString();
   }
 
+  onContactTypeChange(contactType) {
+    this.reservation.contact.type = +contactType;
+  }
+
   update(id) {
     this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservationService.update(id, this.reservation).subscribe(() => {
@@ -126,7 +145,6 @@ export class ReservationAddEditComponent implements OnInit {
     this.reservation.contact.name = this.firstLetterToUpperCase(this.reservation.contact.name);
     this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservation.contact.dateOfBirth = dateOfBirth;
-    this.reservation.contact.type = 1; // remove this later
     this.reservationService.save(this.reservation).subscribe(() => {
       this.goToReservationListPage()
     });

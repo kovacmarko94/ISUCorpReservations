@@ -21,7 +21,7 @@
     position: relative;
 }
 
-.reservation-add-edit-content-item input {
+.reservation-add-edit-content-item input, select {
     height: 62px;
     padding-left: 58px;
 }

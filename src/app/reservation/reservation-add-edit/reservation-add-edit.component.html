@@ -16,15 +16,26 @@
                     <i class="fa fa-user-circle"></i>
                 </div>
                 <div class="reservation-add-edit-content-item">
-                    <input 
-                        formControlName="contactType" 
-                        [ngClass]="{'is-invalid': error && contactType.invalid}" 
-                        type="text" class="form-control" 
-                        placeholder="Contact Type" 
-                        aria-describedby="basic-addon1"
-                        [attr.disabled]="disableContactFields ? '' : null"
-                        [(ngModel)]="reservation.contact.type">
-                    <i class="fa fa-globe"></i>
+                    <div class="form-group">
+                        <div style="position:relative;">
+                          <select 
+                            class="form-control"
+                            formControlName="contactType" 
+                            (change)="onContactTypeChange($event.target.value)"
+                            [ngClass]="{'is-invalid': error && contactType.invalid}" 
+                            [attr.disabled]="disableContactFields ? '' : null"
+                            style="color: gray">
+                            <option [selected]="!reservation.contact.type" disabled value="Contact Type">Contact Type</option>
+                            <option 
+                                *ngFor="let contactType of contactTypes; let i = index" 
+                                [selected]="contactType.id === reservation.contact.type" 
+                                [value]=i >
+                                {{contactType.name}}
+                            </option>
+                          </select>
+                          <i class="fa fa-globe"></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="reservation-add-edit-content-item">
                     <input 
