@@ -63,6 +63,13 @@ export class ReservationAddEditComponent implements OnInit {
     }
   }
 
+  getDateOfBirth(date) {
+    if (typeof date === 'string') {
+      return date;
+    } 
+    return getDateOfBirth(date);
+  }
+
   focusEditor() {
     const element = this.renderer.selectRootElement('#contactName');
     setTimeout(() => element.blur(), 0);
@@ -73,7 +80,9 @@ export class ReservationAddEditComponent implements OnInit {
     for (let i = 0; i < this.reservations.length; i++) {
       if (this.reservations[i].contact.name === name) {
         this.reservation = this.reservations[i];
+        this.reservation.id = null;
         this.updateFormValues(); 
+        break;
       }
     }
     this.disableFormContactFields();
@@ -84,7 +93,14 @@ export class ReservationAddEditComponent implements OnInit {
   }
 
   getNames() {
-    return this.reservations.map(reservation => reservation.contact.name);
+    let names = [];
+    for (let i = 0; i < this.reservations.length; i++) {
+      let contactName = this.reservations[i].contact.name;
+      if (names.indexOf(contactName) === -1) {
+        names.push(contactName);
+      }
+    }
+    return names;
   }
 
   applyFormValidations() {
@@ -163,7 +179,7 @@ export class ReservationAddEditComponent implements OnInit {
   }
 
   save() {
-    const dateOfBirth = getDateOfBirth(this.reservation.contact.dateOfBirth);
+    const dateOfBirth = this.getDateOfBirth(this.reservation.contact.dateOfBirth);
     this.reservation.contact.name = firstLetterToUpperCase(this.reservation.contact.name);
     this.reservation.dateOfCreation = this.getDateOfReservationCreation();
     this.reservation.contact.dateOfBirth = dateOfBirth;
