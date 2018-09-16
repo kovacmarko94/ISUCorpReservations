@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../share/service/contact.service';
 import { Router } from '@angular/router';
+import { Contact } from '../../share/model/contact';
 
 @Component({
   selector: 'app-contact-list',
@@ -43,4 +44,13 @@ export class ContactListComponent implements OnInit {
     this.router.navigate(['/contact/add-edit']);
   }
 
+  edit(contact: Contact) {
+    this.router.navigate(['contact/add-edit/' + contact.id]);
+  }
+  
+  delete(contact: Contact) {
+    this.contactService.delete(contact.id).subscribe(() => {
+      this.getAllContacts();
+    });
+  }
 }

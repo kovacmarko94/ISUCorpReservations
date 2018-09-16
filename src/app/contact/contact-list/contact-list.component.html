@@ -23,10 +23,10 @@
               <p>{{contact.dateOfBirth}}</p>
             </div>
             <div class="contact-list-item">
-              <button class="btn btn-gray">EDIT</button>
+              <button class="btn btn-gray" (click)="edit(contact)">EDIT</button>
             </div>
             <div class="contact-list-item">
-              <button class="btn btn-red">DELETE</button>
+              <button class="btn btn-red" (click)="delete(contact)">DELETE</button>
             </div>
           </div>
       </div>

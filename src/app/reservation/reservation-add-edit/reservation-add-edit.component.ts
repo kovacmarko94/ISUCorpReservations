@@ -107,11 +107,10 @@ export class ReservationAddEditComponent implements OnInit {
   }
 
   setupReservationForm() {
-    const isIdPresent = this.getReservationIdFromUrl();
-    if (isIdPresent) {
+    const id = this.getReservationIdFromUrl();
+    if (id) {
       this.disableFormContactFields();
       this.applyFormValidations();
-      const id = this.getReservationIdFromUrl();
       this.reservationService.findById(id).subscribe(response => {
         this.reservation = response;
         this.updateFormValues();

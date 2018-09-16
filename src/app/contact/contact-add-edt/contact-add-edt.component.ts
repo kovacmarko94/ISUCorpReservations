@@ -45,7 +45,30 @@ export class ContactAddEdtComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.setupAddEditContactForm();
+  }
+
+  getContactIdFromUrl() {
+    const id = this.activeRoute.snapshot.params.id
+    return id ? id : null;
+  }
+
+  setupAddEditContactForm() {
     this.applyFormValidations();
+    const id = this.getContactIdFromUrl();
+    if (id) {
+      this.contactService.findById(id).subscribe(response => {
+        this.contact = response;
+        this.updateFormValues();
+      });
+    }
+  }
+
+  updateFormValues() {
+    this.form.value['contactName'] = this.contact.name;
+    this.form.value['contactType'] = this.contact.type;
+    this.form.value['dateOfBirth'] = this.contact.dateOfBirth;
+    this.form.value['phoneNumber'] = this.contact.phoneNumber;
   }
 
   applyFormValidations() {
